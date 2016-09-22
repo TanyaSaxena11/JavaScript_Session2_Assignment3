@@ -1,0 +1,47 @@
+<html>
+<head>
+<title>Max Sequence Finder</title>
+<script type="text/javascript">
+
+test([3, 2, 3, 4, 2, 2, 4], "[2, 3, 4]");
+test([3, 5, 4, 6, 1, 2, 3, 6, 10, 32], "[1, 2, 3, 6, 10, 32]");
+test([3, 2, 1], "[3]");
+
+
+function findMaxSequence(array) {
+  var previousVal;
+  var longestSequence = [];
+  var currentSequence = [];
+
+  array.forEach(function(val, i, arr) {
+    // Test if it's the first item or a val higher than the previous.
+    if (i === 0 || previousVal < val) {
+    	
+      currentSequence.push(val);
+      
+    } else {
+      // Start a new sequence.
+      currentSequence = [val];      
+    }
+    
+    previousVal = val;
+
+    // Check if our current sequence exceeds our highest.
+    if (longestSequence.length < currentSequence.length) {
+    	
+      longestSequence = currentSequence;
+    }
+  });
+
+  return "[" + longestSequence.join(", ") + "]";
+  
+}
+
+function test(input, expected) {
+  var output = findMaxSequence(input);    
+  document.write(output + "</br>");
+}
+
+</script>
+</head>
+</html>
